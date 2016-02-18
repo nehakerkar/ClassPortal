@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  email: MyString
+  password_digest: MyString
+  name: MyString
+  usertype: MyString
+  deleteable: false
+
+two:
+  email: MyString
+  password_digest: MyString
+  name: MyString
+  usertype: MyString
+  deleteable: false

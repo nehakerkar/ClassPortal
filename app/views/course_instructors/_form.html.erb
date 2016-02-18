@@ -1,0 +1,37 @@
+<%= form_for(@course_instructor) do |f| %>
+  <% if @course_instructor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@course_instructor.errors.count, "error") %> prohibited this course_instructor from being saved:</h2>
+
+      <ul>
+      <% @course_instructor.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= select("course_instructor", "user_id", Instructor.all.collect{ |c| [ c.name, c.id] }) %>
+  </div>
+  <div class="field">
+    <%= f.label :course_id %><br>
+    <%= select("course_instructor", "course_id", Course.all.collect{ |c| [ c.title, c.id] }) %>
+  </div>
+  <div class="field">
+    <%= f.label :startdate %><br>
+    <%= f.datetime_select :startdate %>
+  </div>
+  <div class="field">
+    <%= f.label :enddate %><br>
+    <%= f.datetime_select :enddate %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= select("course_instructor", "status", [["active","active"],["inactive","inactive"]]) %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

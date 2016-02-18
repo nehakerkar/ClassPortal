@@ -1,0 +1,28 @@
+<%= render 'layouts/header' %>
+<h1> Welcome Admin, <%=@admin.name%> </h1><br>
+<fieldset>
+<legend><h3> Manage Admins</h3></legend>
+<%= link_to 'Create New Admin', new_admin_path %><br>
+<%= link_to 'View/Edit/Remove Admins', admins_path %><br>
+</fieldset>
+<br><br>
+<fieldset>
+<legend><h3> Manage Courses</h3></legend>
+<%= link_to 'Create New Course', new_course_path %><br>
+<%= link_to 'View/Edit/Remove All Courses', courses_path %><br>
+<%= link_to 'Add Instructor to Courses', new_course_instructor_path %><br>
+<%= link_to 'Remove Courses', new_admin_path %><br>
+</fieldset>
+<br><br>
+<fieldset>
+<legend><h3> Manage Instructors</h3></legend>
+<%= link_to 'Create New Instructor', new_instructor_path %><br>
+<%= link_to 'View/Edit/Remove Instructors', instructors_path %><br>
+</fieldset>
+<br><br>
+<fieldset>
+<legend><h3> Manage Students</h3></legend>
+<%= link_to 'View All Students', new_admin_path %><br>
+<%= link_to 'Edit Students', new_admin_path %><br>
+<%= link_to 'Remove Students', new_admin_path %><br>
+</fieldset>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../ClassPortal_old/.idea/ClassPortal.iml" filepath="$PROJECT_DIR$/../ClassPortal_old/.idea/ClassPortal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../MyAdLounge/.idea/MyAdLounge.iml" filepath="$PROJECT_DIR$/../MyAdLounge/.idea/MyAdLounge.iml" />
+    </modules>
+  </component>
+</project>

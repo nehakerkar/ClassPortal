@@ -1,0 +1,29 @@
+<%= render 'layouts/header' %>
+
+<p>
+  <strong>User:</strong>
+  <%= @course_instructor.user.name %>
+</p>
+
+<p>
+  <strong>Course:</strong>
+  <%= @course_instructor.course.title %>
+</p>
+
+<p>
+  <strong>Startdate:</strong>
+  <%= @course_instructor.startdate %>
+</p>
+
+<p>
+  <strong>Enddate:</strong>
+  <%= @course_instructor.enddate %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @course_instructor.status %>
+</p>
+
+<%= link_to 'Edit', edit_course_instructor_path(@course_instructor) %> |
+<%= link_to 'Back', :back %>

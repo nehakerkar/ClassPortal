@@ -1,0 +1,36 @@
+<%= render 'layouts/header' %>
+
+<h1>Listing Course Instructors</h1>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Course</th>
+      <th>Startdate</th>
+      <th>Enddate</th>
+      <th>Status</th>
+      <th colspan="4"> Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @course_instructors.each do |course_instructor| %>
+      <tr>
+        <td><%= course_instructor.user.name %></td>
+        <td><%= course_instructor.course.title %></td>
+        <td><%= course_instructor.startdate %></td>
+        <td><%= course_instructor.enddate %></td>
+        <td><%= course_instructor.status %></td>
+        <td><%= link_to 'Show', course_instructor %></td>
+        <td><%= link_to 'Edit', edit_course_instructor_path(course_instructor) %></td>
+        <td><%= link_to 'Destroy', course_instructor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Add Material', new_material_path%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Course instructor', new_course_instructor_path %>

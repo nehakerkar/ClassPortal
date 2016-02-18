@@ -1,0 +1,28 @@
+<%= form_for(@material) do |f| %>
+  <% if @material.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@material.errors.count, "error") %> prohibited this material from being saved:</h2>
+
+      <ul>
+      <% @material.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+ <div class="field">
+    <%= f.label :course_instructors_id %><br>
+        <%= select("material", "course_instructors_id", Course.all.collect{ |c| [ c.title, c.id] }) %>
+<!--
+    <%= select("material", "course_instructors_id", Course_Instructor.all.collect{ |c| [ c.course_id+" "+c.user_id, c.id] }) %>-->
+  </div>
+  
+  <div class="field">
+    <%= f.label :material %><br>
+    <%= f.text_area :material %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
