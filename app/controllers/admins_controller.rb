@@ -43,7 +43,7 @@ class AdminsController < ApplicationController
   # PATCH/PUT /admins/1.json
   def update
   @admin = Admin.find(params[:id])
-  if(@admin.email!=params[:email] || @admin.name!=params[:name] || @admin.name!=params[:password])
+
     respond_to do |format|
       if @admin.update(admin_params)
         format.html { redirect_to @admin, notice: 'Admin was successfully updated.' }
@@ -53,10 +53,7 @@ class AdminsController < ApplicationController
         format.json { render json: @admin.errors, status: :unprocessable_entity }
       end
     end
-  else
-  	flash[:notice] = 'No edit made.'
-  	redirect_to @admin
-  end
+
   end
 
   # DELETE /admins/1
@@ -77,6 +74,6 @@ class AdminsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_params
-		params.require(:admin).permit(:email, :name, :password, :type, :deleteable)    
+		params.require(:admin).permit(:email, :name, :password, :password_confirmation, :type, :deleteable)    
 	end
 end

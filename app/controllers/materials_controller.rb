@@ -42,8 +42,8 @@ class MaterialsController < ApplicationController
   def update
     respond_to do |format|
       if @material.update(material_params)
-        format.html { redirect_to @material, notice: 'Material was successfully updated.' }
-        format.json { render :show, status: :ok, location: @material }
+        format.html { redirect_to current_user, notice: 'Material was successfully updated.' }
+        format.json { render :show, status: :ok, location: current_user }
       else
         format.html { render :edit }
         format.json { render json: @material.errors, status: :unprocessable_entity }

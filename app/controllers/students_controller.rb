@@ -4,7 +4,13 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    @students = Student.all
+    
+    if(Admin.new.type== current_user.type)
+    	@students = Student.all
+    else
+    	flash[:danger] = "Trespassers will be prosecuted!"
+    	redirect_to user_path(current_user.id)
+    end
   end
 
   # GET /students/1
@@ -19,6 +25,7 @@ class StudentsController < ApplicationController
 
   # GET /students/1/edit
   def edit
+   @student = Student.find(params[:id])
   end
 
   # POST /students
@@ -28,6 +35,7 @@ class StudentsController < ApplicationController
 	@student.deleteable = true
     respond_to do |format|
       if @student.save
+      	log_in @student
         format.html { redirect_to @student, notice: 'Student was successfully created.' }
         format.json { render :show, status: :created, location: @student }
       else
@@ -69,6 +77,6 @@ class StudentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
-      params.require(:student).permit(:email, :name, :password, :type, :deleteable)
+      params.require(:student).permit(:email, :name, :password, :password_confirmation, :type, :deleteable)
     end
 end

@@ -7,7 +7,8 @@ class InstructorsController < ApplicationController
     if(Admin.new.type== current_user.type)
     	@instructors = Instructor.all
     else
-    	redirect_to instructor_path(current_user.id)
+    	flash[:danger] = "Trespassers will be prosecuted!"
+		redirect_to user_path(current_user.id)
     end
   end
 
@@ -87,6 +88,6 @@ class InstructorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def instructor_params
-      params.require(:instructor).permit(:email, :name, :password, :type, :deleteable)
+      params.require(:instructor).permit(:email, :name, :password, :password_confirmation, :type, :deleteable)
     end
 end

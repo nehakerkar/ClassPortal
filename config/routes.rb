@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   resources :admins
   resources :course_students
   resources :materials
-  resources :course_instructors
+  resources :course_instructors do
+  collection { post :add_material }
+  end
   resources :courses
   resources :users
   

@@ -25,7 +25,7 @@
         <td><%= link_to 'Show', course_instructor %></td>
         <td><%= link_to 'Edit', edit_course_instructor_path(course_instructor) %></td>
         <td><%= link_to 'Destroy', course_instructor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= link_to 'Add Material', new_material_path%></td>
+        <td><%= form_tag({:action => :add_material}) do %><%= hidden_field_tag 'id', course_instructor.id%><%= submit_tag( "Add Material" ) %><% end%></td>
       </tr>
     <% end %>
   </tbody>

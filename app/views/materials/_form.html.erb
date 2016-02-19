@@ -12,10 +12,7 @@
   <% end %>
 
  <div class="field">
-    <%= f.label :course_instructors_id %><br>
-        <%= select("material", "course_instructors_id", Course.all.collect{ |c| [ c.title, c.id] }) %>
-<!--
-    <%= select("material", "course_instructors_id", Course_Instructor.all.collect{ |c| [ c.course_id+" "+c.user_id, c.id] }) %>-->
+    <%= hidden_field_tag 'id', @material.course_instructor_id%>
   </div>
   
   <div class="field">

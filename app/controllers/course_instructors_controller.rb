@@ -63,18 +63,27 @@ class CourseInstructorsController < ApplicationController
   # DELETE /course_instructors/1
   # DELETE /course_instructors/1.json
   def destroy
+  	begin
     @course_instructor.destroy
     respond_to do |format|
       format.html { redirect_to course_instructors_url, notice: 'Course instructor was successfully destroyed.' }
       format.json { head :no_content }
     end
+    rescue ActiveRecord::StatementInvalid
+      flash[:danger] = "Instructor has references. Unable to delete."
+     redirect_to course_instructors_url 
+    end
   end
 
 	def add_material
 		@material = Material.new
-		@material.course_instructor_id = @self.id
-		@material.material = "abc"
-		redirect_to 'materials#update'
+		@material.course_instructor_id = params[:id]
+		@material.material = ""
+		@material.save
+		redirect_to edit_material_url @material.id
+	
+		#flash[:notice] = "Material added."
+		#redirect_to course_instructors_url
 	end
 	
   private
