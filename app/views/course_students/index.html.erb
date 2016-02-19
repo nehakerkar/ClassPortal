@@ -1,23 +1,25 @@
-<p id="notice"><%= notice %></p>
+<%= render 'layouts/header' %>
 
 <h1>Listing Course Students</h1>
 
-<table>
+<table border=1>
   <thead>
     <tr>
-      <th>User</th>
-      <th>Course instructor</th>
+      <th>Student</th>
+      <th>Course</th>
+      <th>Instructor</th>
       <th>Grades</th>
       <th>Status</th>
-      <th colspan="3"></th>
+      <th colspan="3">Actions</th>
     </tr>
   </thead>
 
   <tbody>
     <% @course_students.each do |course_student| %>
       <tr>
-        <td><%= course_student.user %></td>
-        <td><%= course_student.course_instructor %></td>
+        <td><%= course_student.user.name %></td>
+        <td><%= course_student.course_instructor.course.title %></td>
+         <td><%= course_student.course_instructor.user.name %></td>
         <td><%= course_student.grades %></td>
         <td><%= course_student.status %></td>
         <td><%= link_to 'Show', course_student %></td>

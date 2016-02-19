@@ -64,6 +64,7 @@ class CourseInstructorsController < ApplicationController
   # DELETE /course_instructors/1.json
   def destroy
   	begin
+  	Material.where('course_instructor_id=?',@course_instructor.id).destroy_all
     @course_instructor.destroy
     respond_to do |format|
       format.html { redirect_to course_instructors_url, notice: 'Course instructor was successfully destroyed.' }

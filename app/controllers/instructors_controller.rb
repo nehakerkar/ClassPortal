@@ -1,5 +1,5 @@
 class InstructorsController < ApplicationController
-  #before_action :set_instructor, only: [:show, :edit, :update, :destroy]
+  before_action :set_instructor, only: [:show, :edit, :update, :destroy]
 
   # GET /instructors
   # GET /instructors.json
@@ -15,7 +15,6 @@ class InstructorsController < ApplicationController
   # GET /instructors/1
   # GET /instructors/1.json
   def show
-   @instructor= Instructor.find(params[:id])
   end
 
   # GET /instructors/new
@@ -25,7 +24,6 @@ class InstructorsController < ApplicationController
 
   # GET /instructors/1/edit
   def edit
-  	@instructor= Instructor.find(params[:id])
   end
 
   # POST /instructors
@@ -47,7 +45,6 @@ class InstructorsController < ApplicationController
   # PATCH/PUT /instructors/1
   # PATCH/PUT /instructors/1.json
   def update
-    @instructor= Instructor.find(params[:id])
     if(current_user.type=="Admin" && @instructor.update(instructor_params))
       	 flash[:notice] = 'Instructor was successfully updated.'
       	 redirect_to admin_path(current_user.id)
@@ -83,7 +80,7 @@ class InstructorsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_instructor
-      @instructor = current_user
+      @instructor = Instructor.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

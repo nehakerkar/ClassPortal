@@ -13,19 +13,19 @@
 
   <div class="field">
     <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
+   	<%= select("course_student", "user_id", Student.all.collect{ |c| [ c.name, c.id] }) %>  </div>
   </div>
   <div class="field">
     <%= f.label :course_instructor_id %><br>
-    <%= f.text_field :course_instructor_id %>
+   	<%= select("course_student", "course_instructor_id", CourseInstructor.all.collect{ |c| [ c.course.title+" by Professor "+c.user.name + ": " +c.startdate.to_s + " to "+ c.enddate.to_s, c.id] }) %>  </div>
   </div>
   <div class="field">
     <%= f.label :grades %><br>
     <%= f.text_field :grades %>
   </div>
-  <div class="field">
+ <div class="field">
     <%= f.label :status %><br>
-    <%= f.text_field :status %>
+   	<%= select("course_student", "status", [["Enrolled","Enrolled"],["Un-Enroll","Unenrolled"]]) %>  </div>
   </div>
   <div class="actions">
     <%= f.submit %>

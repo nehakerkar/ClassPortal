@@ -1,16 +1,20 @@
 class AdminsController < ApplicationController
-  #before_action :set_admin, only: [:show, :edit, :update, :destroy]
+  before_action :set_admin, only: [:show, :edit, :update, :destroy]
 
   # GET /admins
   # GET /admins.json
   def index
+  	if(current_user.type==Admin.new.type)
     @admins = Admin.all
+    else
+    flash[:danger]= "You are not authorized to view this page!"
+    redirect_to current_user
+    end
   end
 
   # GET /admins/1
   # GET /admins/1.json
   def show
-  	@admin = Admin.find(params[:id])
   end
 
   # GET /admins/new
@@ -20,7 +24,6 @@ class AdminsController < ApplicationController
 
   # GET /admins/1/edit
   def edit
-   @admin = Admin.find(params[:id])
   end
 
   # POST /admins
@@ -42,8 +45,6 @@ class AdminsController < ApplicationController
   # PATCH/PUT /admins/1
   # PATCH/PUT /admins/1.json
   def update
-  @admin = Admin.find(params[:id])
-
     respond_to do |format|
       if @admin.update(admin_params)
         format.html { redirect_to @admin, notice: 'Admin was successfully updated.' }
@@ -59,6 +60,11 @@ class AdminsController < ApplicationController
   # DELETE /admins/1
   # DELETE /admins/1.json
   def destroy
+  	if(!@admin.deleteable || @admin.id==current_user.id || current_user.type!=Admin.new.type)
+  		flash[:danger] = "Operation not allowed! Admin can't be deleted."
+  		redirect_to admins_url
+  		return
+  	end
     @admin.destroy
     respond_to do |format|
       format.html { redirect_to admins_url, notice: 'Admin was successfully destroyed.' }
@@ -68,8 +74,8 @@ class AdminsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def get_current_user_id
-      Admin.find(current_user.id).id
+    def set_admin
+      @admin = Admin.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

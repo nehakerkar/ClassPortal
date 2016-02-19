@@ -32,6 +32,19 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+   if(@user.type==Admin.new.type)
+    redirect_to edit_admin_path(Admin.find(@user.id))
+   end
+   
+   if(@user.type==Student.new.type)
+    redirect_to edit_student_path(Student.find(@user.id))
+    return
+   end
+   
+   if(@user.type==Instructor.new.type)
+    redirect_to edit_instructor_path(Instructor.find(@user.id))
+    return
+   end
   end
 
   # POST /users

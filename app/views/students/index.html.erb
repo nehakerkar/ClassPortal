@@ -27,4 +27,6 @@
 
 <br>
 
+<% if(Admin.new.type!=current_user.type) %>
 <%= link_to 'New Student', new_student_path %>
+<% end %>

@@ -25,7 +25,6 @@ class StudentsController < ApplicationController
 
   # GET /students/1/edit
   def edit
-   @student = Student.find(params[:id])
   end
 
   # POST /students
@@ -62,9 +61,10 @@ class StudentsController < ApplicationController
   # DELETE /students/1
   # DELETE /students/1.json
   def destroy
+  	CourseStudent.where('user_id=?',@student.id).destroy_all
     @student.destroy
     respond_to do |format|
-      format.html { redirect_to students_url, notice: 'Student was successfully destroyed.' }
+      format.html { redirect_to admin_path(current_user.id), notice: 'Student was successfully deleted.' }
       format.json { head :no_content }
     end
   end

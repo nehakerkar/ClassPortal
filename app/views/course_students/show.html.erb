@@ -1,13 +1,14 @@
-<p id="notice"><%= notice %></p>
+<%= render 'layouts/header' %>
 
 <p>
-  <strong>User:</strong>
-  <%= @course_student.user %>
+  <strong>Student:</strong>
+  <%= @course_student.user.name %>
 </p>
 
 <p>
   <strong>Course instructor:</strong>
-  <%= @course_student.course_instructor %>
+    <%= @course_student.course_instructor.course.title %> by 
+    <%= @course_student.course_instructor.user.name %>
 </p>
 
 <p>
@@ -21,4 +22,4 @@
 </p>
 
 <%= link_to 'Edit', edit_course_student_path(@course_student) %> |
-<%= link_to 'Back', course_students_path %>
+<%= link_to 'Back', :back %>
