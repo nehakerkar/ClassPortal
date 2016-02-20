@@ -42,6 +42,11 @@ class AdminsController < ApplicationController
 
   # GET /admins/1/edit
   def edit
+  	if(current_user.type!=Admin.new.type && !@admin.deleteable)
+  		flash[:danger] = "You are not authorized to edit this page!"
+  		redirect_to current_user
+  		return
+  	end
   end
 
   # POST /admins
