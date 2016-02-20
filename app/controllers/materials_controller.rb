@@ -32,8 +32,8 @@ class MaterialsController < ApplicationController
   	end
     respond_to do |format|
       if @material.save
-        format.html { redirect_to @material, notice: 'Material was successfully created.' }
-        format.json { render :show, status: :created, location: @material }
+        format.html { redirect_to current_user, notice: 'Material was successfully created.' }
+        format.json { render :show, status: :created, location: current_user }
       else
         format.html { render :new }
         format.json { render json: @material.errors, status: :unprocessable_entity }
@@ -44,7 +44,9 @@ class MaterialsController < ApplicationController
   # PATCH/PUT /materials/1
   # PATCH/PUT /materials/1.json
   def update
-  	if(@material.material=="")
+  @material.update(material_params)
+	if(@material.material == "" )
+  		@material.destroy
   		flash[:notice] = "No material added."
   		redirect_to current_user
   		return

@@ -16,6 +16,24 @@ class AdminsController < ApplicationController
   # GET /admins/1.json
   def show
   end
+  
+  def view_instructor_history
+  	if(current_user.type==Admin.new.type)
+    	@course_instructors = CourseInstructor.all
+    else
+    	flash[:danger]= "You are not authorized to view this page!"
+    	redirect_to current_user
+    end
+  end
+  
+  def view_student_history
+  	if(current_user.type==Admin.new.type)
+    	@course_students = CourseStudent.all
+    else
+    	flash[:danger]= "You are not authorized to view this page!"
+    	redirect_to current_user
+    end
+  end
 
   # GET /admins/new
   def new

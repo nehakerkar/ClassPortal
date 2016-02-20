@@ -14,7 +14,12 @@ Rails.application.routes.draw do
   	  	post :view_material
   	}
   end
-  resources :admins
+  resources :admins do
+  	collection {
+  		get :view_instructor_history
+  		get :view_student_history
+  	}
+  end
   resources :course_students
   resources :materials
   resources :course_instructors do

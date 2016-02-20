@@ -1,0 +1,31 @@
+<%= render 'layouts/header' %>
+
+<h1>Instructors History</h1>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>Instructor</th>
+      <th>Course</th>
+      <th>Course Number</th>
+      <th>Startdate</th>
+      <th>Enddate</th>
+      <th>Status of course</th>
+      <th>Material for the course</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @course_instructors.each do |course_instructor| %>
+      <tr>
+        <td><%= course_instructor.user.name %></td>
+        <td><%= course_instructor.course.title %></td>
+        <td><%= course_instructor.course.coursenumber %></td>
+        <td><%= course_instructor.startdate %></td>
+        <td><%= course_instructor.enddate %></td>
+        <td><%= course_instructor.status %></td>
+        <td><%= form_tag({:action => :view_material, :controller => :instructors}) do %><%= hidden_field_tag 'id', course_instructor.id%><%= submit_tag( "View Material" ) %><% end%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

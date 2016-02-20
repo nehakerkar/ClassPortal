@@ -1,5 +1,5 @@
 class InstructorsController < ApplicationController
-  before_action :set_instructor, only: [:show, :edit, :update, :destroy]
+  before_action :set_instructor, only: [:edit, :update, :destroy]
 
   # GET /instructors
   # GET /instructors.json
@@ -15,6 +15,12 @@ class InstructorsController < ApplicationController
   # GET /instructors/1
   # GET /instructors/1.json
   def show
+  	if(Instructor.new.type== current_user.type)
+    	set_instructor
+    else
+    	flash[:danger] = "Trespassers will be prosecuted!"
+		redirect_to user_path(current_user.id)
+    end
   end
 
   # GET /instructors/new
@@ -136,7 +142,7 @@ class InstructorsController < ApplicationController
 		@material.course_instructor_id = params[:id]
 		@material.material = ""
 		@material.save
-		redirect_to edit_material_url @material.id
+		redirect_to edit_material_url @material
 	end
 	
 	def view_material
