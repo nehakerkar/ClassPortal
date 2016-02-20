@@ -88,7 +88,7 @@ class InstructorsController < ApplicationController
 			flash[:danger] = "You are not authorised to view this page!"
 			redirect_to current_user
 		end
-    	@course_students = CourseStudent.where('course_instructor_id IN (?) and status="Pending"',CourseInstructor.where('user_id=? and startdate>=?',current_user.id,Time.new.inspect).ids)
+    	@course_students = CourseStudent.where('course_instructor_id IN (?) and status=\'Pending\'',CourseInstructor.where('user_id=? and startdate>=?',current_user.id,Time.new.inspect).ids)
 	end
 	
 	def enroll_student
@@ -103,7 +103,7 @@ class InstructorsController < ApplicationController
 			flash[:danger] = "You are not authorised to view this page!"
 			redirect_to current_user
 		end
-		@course_students = CourseStudent.where('course_instructor_id IN (?) and status="Enrolled"',CourseInstructor.where('user_id=?',current_user.id).ids)
+		@course_students = CourseStudent.where('course_instructor_id IN (?) and status=\'Enrolled\'',CourseInstructor.where('user_id=?',current_user.id).ids)
 	end
 	
 	def unenroll_student
