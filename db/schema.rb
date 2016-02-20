@@ -13,27 +13,29 @@
 
 ActiveRecord::Schema.define(version: 20160218014030) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "course_instructors", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
-    t.integer  "course_id",  limit: 4
+    t.integer  "user_id"
+    t.integer  "course_id"
     t.datetime "startdate"
     t.datetime "enddate"
-    t.string   "status",     limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "course_instructors", ["course_id"], name: "index_course_instructors_on_course_id", using: :btree
-  add_index "course_instructors", ["user_id", "course_id"], name: "index_course_instructors_on_user_id_and_course_id", unique: true, using: :btree
   add_index "course_instructors", ["user_id"], name: "index_course_instructors_on_user_id", using: :btree
 
   create_table "course_students", force: :cascade do |t|
-    t.integer  "user_id",              limit: 4
-    t.integer  "course_instructor_id", limit: 4
-    t.string   "grades",               limit: 255
-    t.string   "status",               limit: 255
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.integer  "user_id"
+    t.integer  "course_instructor_id"
+    t.string   "grades"
+    t.string   "status"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   add_index "course_students", ["course_instructor_id"], name: "index_course_students_on_course_instructor_id", using: :btree
@@ -41,11 +43,11 @@ ActiveRecord::Schema.define(version: 20160218014030) do
   add_index "course_students", ["user_id"], name: "index_course_students_on_user_id", using: :btree
 
   create_table "courses", force: :cascade do |t|
-    t.string   "title",        limit: 255
-    t.string   "coursenumber", limit: 255
-    t.text     "description",  limit: 65535
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.string   "title"
+    t.string   "coursenumber"
+    t.text     "description"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "instructors", force: :cascade do |t|
@@ -54,10 +56,10 @@ ActiveRecord::Schema.define(version: 20160218014030) do
   end
 
   create_table "materials", force: :cascade do |t|
-    t.integer  "course_instructor_id", limit: 4
-    t.text     "material",             limit: 65535
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.integer  "course_instructor_id"
+    t.text     "material"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   add_index "materials", ["course_instructor_id"], name: "index_materials_on_course_instructor_id", using: :btree
@@ -68,13 +70,13 @@ ActiveRecord::Schema.define(version: 20160218014030) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",           limit: 255
-    t.string   "password_digest", limit: 255
-    t.string   "name",            limit: 255
-    t.string   "type",            limit: 255
+    t.string   "email"
+    t.string   "password_digest"
+    t.string   "name"
+    t.string   "type"
     t.boolean  "deleteable"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   add_foreign_key "course_instructors", "courses"
