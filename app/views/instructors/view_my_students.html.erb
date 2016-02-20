@@ -1,0 +1,31 @@
+<%= render 'layouts/header' %><br>
+<% if @course_students.size==0 %>
+<h2>You have no students Enrolled in any of your courses.</h2>
+<% else %>
+<table border=1>
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Course</th>
+      <th>Instructor</th>
+      <th>Grades</th>
+      <th>Status</th>
+      <th>Update Grades</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @course_students.each do |course_student| %>
+      <tr>
+        <td><%= course_student.user.name %></td>
+        <td><%= course_student.course_instructor.course.title %></td>
+         <td><%= course_student.course_instructor.user.name %></td>
+        <td><%= course_student.grades %></td>
+        <td><%= course_student.status %></td>
+        <td><%= form_tag({:action => :change_grades}) do %><%= text_field_tag :grades %><%= hidden_field_tag 'id', course_student.id%><%= submit_tag( "Change Grades" ) %><% end%></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<%end%>
+<%= link_to 'Back', :back %>

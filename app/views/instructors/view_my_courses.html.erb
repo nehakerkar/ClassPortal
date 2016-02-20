@@ -1,0 +1,35 @@
+<%= render 'layouts/header' %><br>
+<% if @course_instructors.size==0 %>
+<h2>You have no current courses.</h2>
+<% else %>
+<table border=1>
+  <thead>
+    <tr>
+      <th>Course</th>
+      <th>Course Number</th>
+      <th>Startdate</th>
+      <th>Enddate</th>
+      <th>Status</th>
+      <th>Materials</th>
+      <th>Add Material</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @course_instructors.each do |course_instructor| %>
+      <tr>
+        <td><%=course_instructor.course.title %></td>
+        <td><%=course_instructor.course.coursenumber %></td>
+        <td><%= course_instructor.startdate %></td>
+        <td><%= course_instructor.enddate %></td>
+        <td><%= course_instructor.status %></td>
+        <td><%= form_tag({:action => :view_material}) do %><%= hidden_field_tag 'id', course_instructor.id%><%= submit_tag( "View Material" ) %><% end%></td>
+        <% if course_instructor.status.downcase=="active" %>
+        <td><%= form_tag({:action => :add_material}) do %><%= hidden_field_tag 'id', course_instructor.id%><%= submit_tag( "Add Material" ) %><% end%></td>
+        <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<%end%>
+<%= link_to 'Back', :back %>

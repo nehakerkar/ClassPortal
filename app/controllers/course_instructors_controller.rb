@@ -4,7 +4,16 @@ class CourseInstructorsController < ApplicationController
   # GET /course_instructors
   # GET /course_instructors.json
   def index
-    @course_instructors = CourseInstructor.all
+	if(current_user.type==Admin.new.type)
+	    @course_instructors = CourseInstructor.all
+    else 
+    	if(current_user.type==Instructor.new.type)
+    	@course_instructors = CourseInstructor.where('user_id=?',current_user.id)
+    	else
+    	flash[:danger] = "You are not authorised to view this page!"
+    	redirect_to current_user
+    	end
+    end    
   end
 
   # GET /course_instructors/1
@@ -83,7 +92,6 @@ class CourseInstructorsController < ApplicationController
 		@material.save
 		redirect_to edit_material_url @material.id
 	
-		#flash[:notice] = "Material added."
 		#redirect_to course_instructors_url
 	end
 	

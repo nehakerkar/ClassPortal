@@ -1,0 +1,21 @@
+<%= render 'layouts/header' %><br>
+<% if @materials.size==0 %>
+<h2>You have no material in this course.</h2>
+<% else %>
+<table border=1>
+  <thead>
+    <tr>
+      <th>Material</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @materials.each do |material| %>
+      <tr>
+        <td><%= material.material %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%end%>
+<%= link_to 'Back', :back %>

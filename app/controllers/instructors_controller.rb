@@ -77,6 +77,67 @@ class InstructorsController < ApplicationController
     end
   end
 
+	def show_pending_students_requests
+		if(current_user.type!=Instructor.new.type)
+			flash[:danger] = "You are not authorised to view this page!"
+			redirect_to current_user
+		end
+    	@course_students = CourseStudent.where('course_instructor_id IN (?) and status="Pending"',CourseInstructor.where('user_id=?',current_user.id).ids)
+	end
+	
+	def enroll_student
+		@course_student = CourseStudent.find(params[:course_student])
+		@course_student.update(status: 'Enrolled')
+		flash[:notice] = "Student enrolled successfully."
+		redirect_to instructor_path current_user
+	end
+	
+	def show_enrolled_students_requests
+		if(current_user.type!=Instructor.new.type)
+			flash[:danger] = "You are not authorised to view this page!"
+			redirect_to current_user
+		end
+		@course_students = CourseStudent.where('course_instructor_id IN (?) and status="Enrolled"',CourseInstructor.where('user_id=?',current_user.id).ids)
+	end
+	
+	def unenroll_student
+		@course_student = CourseStudent.find(params[:course_student])
+		@course_student.destroy
+		flash[:notice] = "Student unenrolled successfully."
+		redirect_to current_user	
+	end
+	
+	def view_my_students
+		@course_students = CourseStudent.where('course_instructor_id IN (?)',CourseInstructor.where('user_id=?',current_user.id).ids)
+	end
+	
+	def change_grades
+		if(current_user.type!=Instructor.new.type)
+			flash[:danger] = "You are not authorised to view this page!"
+			redirect_to current_user
+		end
+		@course_student = CourseStudent.find(params[:id])
+		@course_student.update(grades: params[:grades])
+		flash[:notice] = "Grade updated for Student "+@course_student.user.name
+		redirect_to view_my_students_instructors_path
+	end
+	
+	def view_my_courses
+		@course_instructors = CourseInstructor.where("user_id=?",current_user.id)
+	end
+	
+	def add_material
+		@material = Material.new
+		@material.course_instructor_id = params[:id]
+		@material.material = ""
+		@material.save
+		redirect_to edit_material_url @material.id
+	end
+	
+	def view_material
+		@materials = Material.where('course_instructor_id=?',params[:id])
+	end
+	
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_instructor

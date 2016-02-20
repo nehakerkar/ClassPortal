@@ -25,7 +25,11 @@ class MaterialsController < ApplicationController
   # POST /materials.json
   def create
     @material = Material.new(material_params)
-
+	if(@material.material=="")
+  		flash[:notice] = "No material added."
+  		redirect_to current_user
+  		return
+  	end
     respond_to do |format|
       if @material.save
         format.html { redirect_to @material, notice: 'Material was successfully created.' }
@@ -40,6 +44,11 @@ class MaterialsController < ApplicationController
   # PATCH/PUT /materials/1
   # PATCH/PUT /materials/1.json
   def update
+  	if(@material.material=="")
+  		flash[:notice] = "No material added."
+  		redirect_to current_user
+  		return
+  	end
     respond_to do |format|
       if @material.update(material_params)
         format.html { redirect_to current_user, notice: 'Material was successfully updated.' }

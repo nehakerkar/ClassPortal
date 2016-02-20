@@ -1,7 +1,19 @@
 Rails.application.routes.draw do
 
   resources :students
-  resources :instructors
+  resources :instructors do
+  	collection { 
+  		get :show_pending_students_requests
+  		get :show_enrolled_students_requests
+  	  	post :enroll_student
+  	  	post :unenroll_student
+  	  	get :view_my_students
+  	  	get :view_my_courses
+  	  	post :change_grades
+  	  	post :add_material
+  	  	post :view_material
+  	}
+  end
   resources :admins
   resources :course_students
   resources :materials
