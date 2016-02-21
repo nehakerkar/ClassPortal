@@ -36,6 +36,16 @@ Rails.application.routes.draw do
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
+
+  match '/search_courses' => 'courses#search', via: :get
+
+  match '/display_enroll_request' => 'courses#displayenrollrequest', via: :get, :as => :course_enroll_request
+
+  get '/courses/:id' => 'courses#show', :as => :course_show
+
+  match '/drop_course' => 'courses#droprequest', via: :get, :as => :drop_course_request
+
+  #match '/courses/:id'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
