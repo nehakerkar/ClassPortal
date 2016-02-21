@@ -31,10 +31,10 @@
 
 <p>
   <strong>Materials:</strong>
-  <%= if params[:course_instr_id]
+  <% if params[:course_instr_id]
        @courseinstrresult = CourseInstructor.find(params[:course_instr_id]).materials
-	   @courseinstrresult.each do |eachcourse|
-	       eachcourse.material %><br><%=
+	   @courseinstrresult.each do |eachcourse|%>
+	    <%=  eachcourse.material %><br><%
 	   end
      end
   %>
