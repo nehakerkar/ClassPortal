@@ -1,0 +1,10 @@
+<br>
+<h1>Request sent</h1>
+
+<% @courses.each do |course| %>
+    <p>
+      <strong>Your request for to enroll in
+      <%= course.title %>
+      has been sent to the instructor</strong>
+    </p>
+<% end %>

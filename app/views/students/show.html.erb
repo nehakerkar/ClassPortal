@@ -1,4 +1,71 @@
 <%= render 'layouts/header' %>
+  <strong>Your Profile</strong>
+</p>
+<br>
 
-<%= link_to 'Edit', edit_student_path(@student) %> |
-<%= link_to 'Back', students_path %>
+<p>
+  <strong>Name:</strong>
+  <%= @student.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @student.email %>
+</p>
+
+<br>
+
+<%= link_to 'Edit profile', edit_student_path(@student) %>
+<br>
+<br>
+
+<h3>Search for Courses: </h3>
+<p>
+  <strong>Enter search criteria: </strong>
+</p>
+
+<%= form_tag('/search_courses', method: "get") do %>
+    <%= label_tag(:course_number, "Course number:") %>
+    <%= text_field_tag(:course_number) %>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <%= label_tag(:course_title, "Course title:") %>
+    <%= text_field_tag(:course_title) %>
+    <br>
+    <br>
+    <%= label_tag(:course_description, "Course description:") %>
+    <%= text_field_tag(:course_description) %>
+    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+    <%= label_tag(:course_instructor, "Course instructor:") %>
+    <%= text_field_tag(:course_instructor) %>
+    <br>
+    <br>
+    <%= label_tag(:course_status, "Course status:") %>
+    <%= text_field_tag(:course_status) %>
+    <br>
+    <%= submit_tag("Search") %>
+<% end %>
+
+<br>
+<h3>Course History</h3>
+<table cellspacing="25">
+  <tr>
+    <th>Course Title</th>
+    <th>Course Status</th>
+    <th>Course Grade</th>
+  </tr>
+
+  <% @course_students = CourseStudent.where(:user_id => User.where(:email => @student.email).ids) %>
+  <% @course_students.each do |course_student| %>
+    <tr>
+      <td><%=course_student.course_instructor.course.title%></td>
+      <td><%=course_student.status%></td>
+      <td><%=course_student.grades%></td>
+      <td> <%= if course_student.status.to_s == "active" or course_student.status.to_s == "pending"
+                link_to 'Drop Course', drop_course_request_path(:course_student_id => course_student.id)
+              end %></td>
+
+    </tr>
+  <%end%>
+
+</table>
+

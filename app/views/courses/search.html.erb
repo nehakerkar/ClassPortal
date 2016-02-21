@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Courses matching your search criteria</h1>
+
+<table cellpadding="5"cellspacing="30">
+  <thead>
+  <tr>
+    <th>Course Number</th>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Instructor</th>
+    <th>Status</th>
+    <th colspan="6"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @courseinstrobjects.each do |courseinstrobject| %>
+      <tr>
+        <td><%= courseinstrobject.course.coursenumber %></td>
+        <td><%= courseinstrobject.course.title %></td>
+        <td><%= courseinstrobject.course.description %></td>
+        <td><%= courseinstrobject.user.name %></td>
+        <td><%= courseinstrobject.status %></td>
+        <td><%= link_to 'View Course', course_show_path(:id => courseinstrobject.course.id, :course_instr_id  => courseinstrobject.id) %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+

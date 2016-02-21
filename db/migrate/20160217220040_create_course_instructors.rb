@@ -9,7 +9,6 @@ class CreateCourseInstructors < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-   # add_index :course_instructors, [:user_id, :course_id, :startdate, :enddate], :unique => true
   end
   
 end
