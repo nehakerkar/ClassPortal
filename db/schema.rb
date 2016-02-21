@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160218014030) do
+ActiveRecord::Schema.define(version: 20160217221054) do
 
   create_table "course_instructors", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 20160218014030) do
   end
 
   add_index "course_instructors", ["course_id"], name: "index_course_instructors_on_course_id", using: :btree
-  add_index "course_instructors", ["user_id", "course_id"], name: "index_course_instructors_on_user_id_and_course_id", unique: true, using: :btree
   add_index "course_instructors", ["user_id"], name: "index_course_instructors_on_user_id", using: :btree
 
   create_table "course_students", force: :cascade do |t|
@@ -48,11 +47,6 @@ ActiveRecord::Schema.define(version: 20160218014030) do
     t.datetime "updated_at",                 null: false
   end
 
-  create_table "instructors", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "materials", force: :cascade do |t|
     t.integer  "course_instructor_id", limit: 4
     t.text     "material",             limit: 65535
@@ -61,11 +55,6 @@ ActiveRecord::Schema.define(version: 20160218014030) do
   end
 
   add_index "materials", ["course_instructor_id"], name: "index_materials_on_course_instructor_id", using: :btree
-
-  create_table "students", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",           limit: 255
