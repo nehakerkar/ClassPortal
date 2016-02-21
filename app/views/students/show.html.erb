@@ -60,7 +60,7 @@
       <td><%=course_student.course_instructor.course.title%></td>
       <td><%=course_student.status%></td>
       <td><%=course_student.grades%></td>
-      <td> <%= if course_student.status.to_s == "active" or course_student.status.to_s == "pending"
+      <td> <%= if course_student.status.to_s == "enrolled" or course_student.status.to_s == "pending"
                 link_to 'Drop Course', drop_course_request_path(:course_student_id => course_student.id)
               end %></td>
 
