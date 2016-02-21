@@ -1,4 +1,7 @@
+<<<<<<< 8151348119981a5c8ae66fc4d83c51c2ab2e8c14
 <%= render 'layouts/header' %>
+=======
+<p>
   <strong>Your Profile</strong>
 </p>
 <br>
@@ -68,4 +71,5 @@
   <%end%>
 
 </table>
+>>>>>>> New commit in this branch
 

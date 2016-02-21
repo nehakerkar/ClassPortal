@@ -9,6 +9,10 @@ class CreateCourseInstructors < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+<<<<<<< 8151348119981a5c8ae66fc4d83c51c2ab2e8c14
+   # add_index :course_instructors, [:user_id, :course_id, :startdate, :enddate], :unique => true
+=======
+>>>>>>> New commit in this branch
   end
   
 end

@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: [:show, :edit, :update, :destroy]
+  before_action :set_course, only: [:show, :edit, :update, :destroy,]
 
   # GET /courses
   # GET /courses.json
@@ -10,6 +10,55 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
+  end
+
+  def search
+    @courseinstrobjects = []
+    @flag = 0
+    logger.debug(params.to_s)
+    if params[:course_number] != ""
+      logger.debug("1")
+      @courseinstrobjects += CourseInstructor.where(:course_id => Course.where(:coursenumber => params[:course_number]).ids)
+      @flag = 1
+    end
+    if params[:course_title]!= ""
+      logger.debug("2")
+      @courseinstrobjects += CourseInstructor.where(:course_id => Course.where(:title => params[:course_title]).ids)
+      @flag = 1
+    end
+    if params[:course_description]!= ""
+      logger.debug("3")
+      @courseinstrobjects += CourseInstructor.where(:course_id => Course.where(:description => params[:course_description]).ids)
+      @flag = 1
+    end
+    if params[:course_instructor]!= ""
+      logger.debug("4")
+      @courseinstrobjects += CourseInstructor.where(:user_id => User.where(:name => params[:course_instructor]).ids)
+      @flag = 1
+    end
+    if params[:course_status]!= ""
+      logger.debug("5")
+      @courseinstrobjects += CourseInstructor.where(:status => params[:course_status])
+      @flag = 1
+    end
+
+    if @courseinstrobjects.size == 0 and @flag == 0
+
+      @courseinstrobjects = CourseInstructor.where(:status => "active")
+    end
+    @courseinstrobjects = @courseinstrobjects.uniq
+  end
+
+  def displayenrollrequest
+    @courses = Course.where(:coursenumber => params[:course_number]).first(1)
+    @student = User.find(params[:student_id])
+    @course_instr = CourseInstructor.find(params[:course_instr_id])
+    CourseStudent.create(:user_id => @student.id, :course_instructor_id => @course_instr.id, :status => :pending)
+    @courses
+  end
+
+  def droprequest
+    CourseStudent.delete(params[:course_student_id])
   end
 
   # GET /courses/new
