@@ -93,7 +93,7 @@ class InstructorsController < ApplicationController
 	
 	def enroll_student
 		@course_student = CourseStudent.find(params[:course_student])
-		@course_student.update(status: 'Enrolled')
+		@course_student.update(status: 'enrolled')
 		flash[:notice] = "Student enrolled successfully."
 		redirect_to instructor_path current_user
 	end
@@ -103,7 +103,7 @@ class InstructorsController < ApplicationController
 			flash[:danger] = "You are not authorised to view this page!"
 			redirect_to current_user
 		end
-		@course_students = CourseStudent.where('course_instructor_id IN (?) and status=\'Enrolled\'',CourseInstructor.where('user_id=?',current_user.id).ids)
+		@course_students = CourseStudent.where('course_instructor_id IN (?) and status=\'enrolled\'',CourseInstructor.where('user_id=?',current_user.id).ids)
 	end
 	
 	def unenroll_student
