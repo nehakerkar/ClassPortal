@@ -12,4 +12,4 @@ Assumptions:
 if you try to search for a course which does not have any instructor
 assigned, your search will not show the course.
 
-(2)
+(2) System only has super admin pre configured. Instructor can be added to the system by the admins. Students may sign up from login page.
