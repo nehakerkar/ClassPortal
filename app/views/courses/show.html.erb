@@ -14,11 +14,11 @@
   <strong>Description:</strong>
   <%= @course.description %>
 </p>
-<%= if @current_user.type != "Student"
+<%= if current_user.type != "Student"
       link_to 'Edit Course', edit_course_path(@course)
     end %>
 <p>
-<%if @current_user.type != Student.new.type%>
+<%if current_user.type != Student.new.type%>
     <strong>Instructor(s):</strong>
     <ul>
         <% if params[:id]%>
@@ -31,7 +31,7 @@
                 No instructors to display.
         <%end%>
     </ul>
-    <%= if @current_user.type != "Student"
+    <%= if current_user.type != "Student"
             link_to 'Add Instructor to Course', new_course_instructor_path
         end
         %>
@@ -63,7 +63,7 @@
 <%end%>
 </p>
 <p>
-<% if @current_user.type == Student.new.type %>
+<% if current_user.type == Student.new.type %>
     <strong>Instructor:</strong>
     <%=CourseInstructor.find(params[:course_instr_id]).user.name%>
     <br/>
@@ -74,7 +74,7 @@
         <%end%>
     </ul>
     <%flag=true%>
-    <%@current_user.course_students.each do |eachenrollment|%>
+    <%current_user.course_students.each do |eachenrollment|%>
         <%if eachenrollment.course_instructor.id == params[:course_instr_id].to_f%>
             <%flag=false%>
             <strong>Enrollment Status:</strong> 
@@ -83,7 +83,7 @@
     <%end%>
     <%if flag==true%>
         Flag:<%=flag%><br>
-        <%=link_to 'Enroll in course', course_enroll_request_path(course_number: @course.coursenumber, student_id: @current_user.id, course_instr_id: params[:course_instr_id])%>
+        <%=link_to 'Enroll in course', course_enroll_request_path(course_number: @course.coursenumber, student_id: current_user.id, course_instr_id: params[:course_instr_id])%>
     <%end%>
 <%end%>
 </p>

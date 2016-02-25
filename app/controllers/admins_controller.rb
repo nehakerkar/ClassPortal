@@ -1,5 +1,5 @@
 class AdminsController < ApplicationController
-  before_action :set_admin, only: [:edit, :update, :destroy]
+  before_action :set_admin, only: [:update, :destroy]
 
   # GET /admins
   # GET /admins.json
@@ -15,7 +15,11 @@ class AdminsController < ApplicationController
   # GET /admins/1
   # GET /admins/1.json
   def show
-      if(Admin.new.type== current_user.type)
+      if User.find(params[:id]).type!=Admin.new.type
+          redirect_to current_user
+          return
+      end
+      if(Admin.new.type== current_user.type && params[:id].to_f==current_user.id)
           set_admin
       else
           flash[:danger] = "Trespassers will be prosecuted!"
@@ -48,11 +52,16 @@ class AdminsController < ApplicationController
 
   # GET /admins/1/edit
   def edit
-  	if(current_user.type!=Admin.new.type && !@admin.deleteable)
-  		flash[:danger] = "You are not authorized to edit this page!"
-  		redirect_to current_user
-  		return
-  	end
+      if User.find(params[:id]).type!=Admin.new.type
+          redirect_to current_user
+          return
+      end
+      if current_user.type == Admin.new.type && (current_user.deleteable == false || current_user.deleteable==Admin.find(params[:id].deleteable))
+          set_admin
+      else
+          flash[:danger] = "You are not authorized to edit this page!"
+          redirect_to current_user
+      end
   end
 
   # POST /admins

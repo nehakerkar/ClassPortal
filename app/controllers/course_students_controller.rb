@@ -1,5 +1,5 @@
 class CourseStudentsController < ApplicationController
-  before_action :set_course_student, only: [:show, :edit, :update, :destroy]
+  before_action :set_course_student, only: [:update, :destroy]
 
   # GET /course_students
   # GET /course_students.json
@@ -18,6 +18,17 @@ class CourseStudentsController < ApplicationController
   # GET /course_students/1
   # GET /course_students/1.json
   def show
+      if current_user.type==Student.new.type && current_user.id!=CourseStudent.find(params[:id]).user.id
+          flash[:danger] = "Action not allowed!"
+          redirect_to user_path(current_user.id)
+          return
+      end
+      if current_user.type==Instructor.new.type && current_user.id!=CourseStudent.find(params[:id]).course_instructor.user.id
+          flash[:danger] = "Action not allowed!"
+          redirect_to user_path(current_user.id)
+          return
+      end
+      set_course_student
   end
 
   # GET /course_students/new
@@ -27,10 +38,12 @@ class CourseStudentsController < ApplicationController
 
   # GET /course_students/1/edit
   def edit
-  if(current_user.type==Student.new.type)
-  	flash[:danger] = "Action not allowed!"
-  	redirect_to course_students_path
-  end
+      if current_user.type==Student.new.type || (current_user.type==Instructor.new.type && current_user.id!=CourseStudent.find(params[:id]).course_instructor.user.id)
+          flash[:danger] = "Action not allowed!"
+          redirect_to user_path(current_user.id)
+          return
+      end
+      set_course_student
   end
 
   # POST /course_students
@@ -66,7 +79,7 @@ class CourseStudentsController < ApplicationController
     respond_to do |format|
       if @course_student.update(course_student_params)
         format.html { redirect_to current_user, notice: 'Course student was successfully updated.' }
-        format.json { render :show, status: :ok, location: @current_user }
+        format.json { render :show, status: :ok, location: current_user }
       else
         format.html { render :edit }
         format.json { render json: @course_student.errors, status: :unprocessable_entity }

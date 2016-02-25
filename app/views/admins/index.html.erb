@@ -17,7 +17,7 @@
       	<td><%=admin.name%></td>
       	<td><%=admin.email%></td>
         <td><%= link_to 'Edit', edit_admin_path(admin) %></td>
-        <% if(admin.id!=Admin.find(@current_user.id).id) %>
+        <% if(admin.id!=Admin.find(current_user.id).id) %>
         <td><%= link_to 'Destroy', admin, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% else %>
         <td>Suicide is illegal! :P</td>

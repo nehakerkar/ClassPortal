@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-  before_action :set_student, only: [:show, :edit, :update, :destroy]
+  before_action :set_student, only: [:update, :destroy]
 
   # GET /students
   # GET /students.json
@@ -15,6 +15,12 @@ class StudentsController < ApplicationController
   # GET /students/1
   # GET /students/1.json
   def show
+      if current_user.type!=Student.new.type || current_user.id != params[:id].to_f
+          flash[:danger] = "You are not authorized to view this page!"
+          redirect_to user_path(current_user.id)
+      else
+          set_student
+      end
   end
 
   # GET /students/new
@@ -24,6 +30,12 @@ class StudentsController < ApplicationController
 
   # GET /students/1/edit
   def edit
+      if current_user.type==Instructor.new.type || (current_user.type==Student.new.type && current_user.id != params[:id].to_f)
+          flash[:danger] = "You are not authorized to view this page!"
+          redirect_to user_path(current_user.id)
+      else
+          set_student
+      end
   end
 
   # POST /students

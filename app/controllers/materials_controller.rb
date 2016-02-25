@@ -4,12 +4,20 @@ class MaterialsController < ApplicationController
   # GET /materials
   # GET /materials.json
   def index
-    @materials = Material.all
+      if current_user.type != Admin.new.type
+          flash[:danger] = "You are not authorized to view this page!"
+          redirect_to user_path(current_user.id)
+      end
+      @materials = Material.all
   end
 
   # GET /materials/1
   # GET /materials/1.json
   def show
+      if current_user.type != Admin.new.type
+          flash[:danger] = "You are not authorized to view this page!"
+          redirect_to user_path(current_user.id)    
+      end
   end
 
   # GET /materials/new

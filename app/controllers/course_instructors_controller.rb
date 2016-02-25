@@ -4,21 +4,25 @@ class CourseInstructorsController < ApplicationController
   # GET /course_instructors
   # GET /course_instructors.json
   def index
-	if(current_user.type==Admin.new.type)
-	    @course_instructors = CourseInstructor.all
-    else 
-    	if(current_user.type==Instructor.new.type)
-    	@course_instructors = CourseInstructor.where('user_id=?',current_user.id)
-    	else
-    	flash[:danger] = "You are not authorised to view this page!"
-    	redirect_to current_user
-    	end
-    end    
+      if(current_user.type==Admin.new.type)
+          @course_instructors = CourseInstructor.all
+      else 
+          if(current_user.type==Instructor.new.type)
+              @course_instructors = CourseInstructor.where('user_id=?',current_user.id)
+          else
+              flash[:danger] = "You are not authorised to view this page!"
+              redirect_to current_user
+          end
+      end
   end
 
   # GET /course_instructors/1
   # GET /course_instructors/1.json
   def show
+      if current_user.type!=Admin.new.type
+          flash[:danger] = "You are not authorised to view this page!"
+          redirect_to current_user
+      end
   end
 
   # GET /course_instructors/new
@@ -28,30 +32,34 @@ class CourseInstructorsController < ApplicationController
 
   # GET /course_instructors/1/edit
   def edit
+      if current_user.type!=Admin.new.type
+          flash[:danger] = "You are not authorised to view this page!"
+          redirect_to current_user
+      end
   end
 
   # POST /course_instructors
   # POST /course_instructors.json
   def create
     @course_instructor = CourseInstructor.new(course_instructor_params)
-	@collidingcourses = CourseInstructor.where("course_id=? and user_id=?",course_instructor_params[:course_id],course_instructor_params[:user_id])
-	if(@collidingcourses.size!=0)
-		@collidingcourses.each do |old|
-			if( @course_instructor.startdate>@course_instructor.enddate || (@course_instructor.enddate>old.startdate && @course_instructor.startdate<old.enddate))
-			 flash.now[:danger] = "Overlapping course schedule."
-			 render :new
-			 return
-			end
-		end
-	end
+    @collidingcourses = CourseInstructor.where("course_id=? and user_id=?",course_instructor_params[:course_id],course_instructor_params[:user_id])
+    if(@collidingcourses.size!=0)
+        @collidingcourses.each do |old|
+            if( @course_instructor.startdate>@course_instructor.enddate || (@course_instructor.enddate>old.startdate && @course_instructor.startdate<old.enddate))
+                flash.now[:danger] = "Overlapping course schedule."
+                render :new
+                return
+            end
+        end
+    end
     respond_to do |format|
-      if @course_instructor.save
-        format.html { redirect_to @course_instructor, notice: 'Course instructor was successfully created.' }
-        format.json { render :show, status: :created, location: @course_instructor }
-      else
-        format.html { render :new }
-        format.json { render json: @course_instructor.errors, status: :unprocessable_entity }
-      end
+        if @course_instructor.save
+            format.html { redirect_to @course_instructor, notice: 'Course instructor was successfully created.' }
+            format.json { render :show, status: :created, location: @course_instructor }
+        else
+            format.html { render :new }
+            format.json { render json: @course_instructor.errors, status: :unprocessable_entity }
+        end
     end
   end
 

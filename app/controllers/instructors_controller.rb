@@ -15,10 +15,14 @@ class InstructorsController < ApplicationController
   # GET /instructors/1
   # GET /instructors/1.json
   def show
-      if(Instructor.new.type== current_user.type)
+      if User.find(params[:id]).type!=Instructor.new.type
+          redirect_to current_user
+          return  
+      end
+      if Instructor.new.type==current_user.type && current_user.id==params[:id].to_f
           set_instructor
       else
-          flash[:danger] = "Trespassers will be prosecuted!"
+          flash[:danger] = "Unauthorized Operation!"
           redirect_to user_path(current_user.id)
       end
   end
@@ -30,6 +34,18 @@ class InstructorsController < ApplicationController
 
   # GET /instructors/1/edit
   def edit
+      if User.find(params[:id]).type!=Instructor.new.type
+          redirect_to current_user
+          return  
+      end
+      if current_user.type==Student.new.type || (current_user.type==Instructor.new.type && current_user.id!=params[:id].to_f)
+          flash[:danger] = "Unauthorized Operation!"
+          redirect_to current_user
+          return
+      else
+          set_instructor
+      end
+
   end
 
   # POST /instructors
