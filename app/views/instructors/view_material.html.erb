@@ -5,14 +5,16 @@
 <table border=1>
   <thead>
     <tr>
-      <th>Material</th>
+        <th>Material</th>
+        <th>Task</th>
     </tr>
   </thead>
 
   <tbody>
     <% @materials.each do |material| %>
       <tr>
-        <td><%= material.material %></td>
+          <td><%= material.material %></td>
+          <td><%= link_to "Edit", edit_material_path(material.id), method: "get" %>
       </tr>
     <% end %>
   </tbody>

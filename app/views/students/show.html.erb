@@ -52,6 +52,8 @@
     <th>Course Title</th>
     <th>Course Status</th>
     <th>Course Grade</th>
+    <th>Action</th>
+    <th>Materials</th>
   </tr>
 
   <% @course_students = CourseStudent.where(:user_id => User.where(:email => @student.email).ids) %>
@@ -60,12 +62,17 @@
       <td><%=course_student.course_instructor.course.title%></td>
       <td><%=course_student.status%></td>
       <td><%=course_student.grades%></td>
-      <td> <%= if course_student.status.to_s == "enrolled" or course_student.status.to_s == "pending"
-                link_to 'Drop Course', drop_course_request_path(:course_student_id => course_student.id)
-              end %></td>
-
+      <td>
+      <%= if course_student.status.to_s == "enrolled" or course_student.status.to_s == "pending"
+              link_to 'Drop Course', drop_course_request_path(:course_student_id => course_student.id)
+          end %>
+      </td>
+      <td>
+          <% course_student.course_instructor.materials.each do |eachmaterial|%>
+              <%= eachmaterial.material%>&nbsp;
+          <%end%>
+      </td>
     </tr>
   <%end%>
-
 </table>
 

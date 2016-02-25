@@ -5,22 +5,22 @@ class InstructorsController < ApplicationController
   # GET /instructors.json
   def index
     if(Admin.new.type== current_user.type)
-    	@instructors = Instructor.all
+        @instructors = Instructor.all
     else
-    	flash[:danger] = "Trespassers will be prosecuted!"
-		redirect_to user_path(current_user.id)
+        flash[:danger] = "You are not authorized to view this page!"
+        redirect_to user_path(current_user.id)
     end
   end
 
   # GET /instructors/1
   # GET /instructors/1.json
   def show
-  	if(Instructor.new.type== current_user.type)
-    	set_instructor
-    else
-    	flash[:danger] = "Trespassers will be prosecuted!"
-		redirect_to user_path(current_user.id)
-    end
+      if(Instructor.new.type== current_user.type)
+          set_instructor
+      else
+          flash[:danger] = "Trespassers will be prosecuted!"
+          redirect_to user_path(current_user.id)
+      end
   end
 
   # GET /instructors/new
@@ -123,7 +123,7 @@ class InstructorsController < ApplicationController
 			redirect_to current_user
 		end
 		@course_student = CourseStudent.find(params[:id])
-		if(@course_student.course_instructor.startdate<=Time.new.inspect)
+		if(@course_student.course_instructor.startdate>=Time.new.inspect)
 			flash[:danger] = "Cannot update grade!"
 			redirect_to current_user
 			return

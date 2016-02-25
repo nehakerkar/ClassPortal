@@ -2,5 +2,6 @@
 <h1>New Course Instructor</h1>
 
 <%= render 'form' %>
-
+<i>Dont find the course you are looking for? <%= link_to "Click here to add one", new_course_path, method: "get" %></i><br>
+<i>Dont find the Instructor you are looking for? <%= link_to "Click here to add one", new_instructor_path, method: "get" %></i><br>
 <%= link_to 'Back', :back %>

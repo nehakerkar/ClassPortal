@@ -23,7 +23,7 @@
         <td><%= course_instructor.startdate %></td>
         <td><%= course_instructor.enddate %></td>
         <td><%= course_instructor.status %></td>
-        <td><%= form_tag({:action => :view_material}) do %><%= hidden_field_tag 'id', course_instructor.id%><%= submit_tag( "View Material" ) %><% end%></td>
+        <td><%= form_tag({:action => :view_material}) do %><%= hidden_field_tag 'id', course_instructor.id%><%= submit_tag( "View/Edit Material" ) %><% end%></td>
         <% if course_instructor.status.downcase=="active" %>
         <td><%= form_tag({:action => :add_material}) do %><%= hidden_field_tag 'id', course_instructor.id%><%= submit_tag( "Add Material" ) %><% end%></td>
         <% end %>

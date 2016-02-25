@@ -4,11 +4,10 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    
     if(Admin.new.type== current_user.type)
     	@students = Student.all
     else
-    	flash[:danger] = "Trespassers will be prosecuted!"
+    	flash[:danger] = "You are not authorized to view this page!"
     	redirect_to user_path(current_user.id)
     end
   end

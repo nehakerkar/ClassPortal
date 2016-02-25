@@ -7,7 +7,6 @@
     <tr>
       <th>Name</th>
       <th>Email</th>
-      <th>Deleteable</th>
       <th colspan="3">Actions</th>
     </tr>
   </thead>
@@ -17,7 +16,6 @@
       <tr>
       	<td><%=admin.name%></td>
       	<td><%=admin.email%></td>
-      	<td><%=admin.deleteable%></td>
         <td><%= link_to 'Edit', edit_admin_path(admin) %></td>
         <% if(admin.id!=Admin.find(@current_user.id).id) %>
         <td><%= link_to 'Destroy', admin, method: :delete, data: { confirm: 'Are you sure?' } %></td>

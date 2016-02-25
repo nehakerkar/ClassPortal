@@ -1,22 +1,28 @@
 class AdminsController < ApplicationController
-  before_action :set_admin, only: [:show, :edit, :update, :destroy]
+  before_action :set_admin, only: [:edit, :update, :destroy]
 
   # GET /admins
   # GET /admins.json
   def index
-  	if(current_user.type==Admin.new.type)
-    @admins = Admin.all
-    else
-    flash[:danger]= "You are not authorized to view this page!"
-    redirect_to current_user
-    end
+      if(current_user.type==Admin.new.type)
+          @admins = Admin.all
+      else
+          flash[:danger]= "You are not authorized to view this page!"
+          redirect_to current_user
+      end
   end
 
   # GET /admins/1
   # GET /admins/1.json
   def show
+      if(Admin.new.type== current_user.type)
+          set_admin
+      else
+          flash[:danger] = "Trespassers will be prosecuted!"
+          redirect_to user_path(current_user.id)
+      end
   end
-  
+
   def view_instructor_history
   	if(current_user.type==Admin.new.type)
     	@course_instructors = CourseInstructor.all

@@ -16,17 +16,16 @@
   <tbody>
     <% @materials.each do |material| %>
       <tr>
-        <td><%= material.course %></td>
-        <td><%= material.user %></td>
+        <td><%= material.course_instructor.course.title %></td>
+        <td><%= material.course_instructor.user.name %></td>
         <td><%= material.material %></td>
-        <td><%= link_to 'Show', material %></td>
-        <td><%= link_to 'Edit', edit_material_path(material) %></td>
-        <td><%= link_to 'Destroy', material, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%if current_user.type != Student.new.type%>
+          <td><%= link_to 'Edit', edit_material_path(material) %></td>
+          <td><%= link_to 'Destroy', material, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
       </tr>
     <% end %>
   </tbody>
 </table>
-
 <br>
-
-<%= link_to 'New Material', new_material_path %>
+<%= link_to 'Back', :back %>

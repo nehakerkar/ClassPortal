@@ -22,7 +22,7 @@
          <td><%= course_student.course_instructor.user.name %></td>
         <td><%= course_student.grades %></td>
         <td><%= course_student.status %></td>
-        <% if(course_student.course_instructor.startdate>=Time.new.inspect) %>
+        <% if(course_student.course_instructor.startdate<=Time.new.inspect) %>
         <td><%= form_tag({:action => :change_grades}) do %><%= text_field_tag :grades %><%= hidden_field_tag 'id', course_student.id%><%= submit_tag( "Change Grades" ) %><% end%></td>
         <% else %>
         <td>Cannot update grade</td>

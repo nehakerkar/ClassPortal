@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 has_many :course_instructors
-has_many :student_courses
+has_many :course_students
 
  before_save { self.email = email.downcase }
  validates :name, presence: true, length: { maximum: 50 }
