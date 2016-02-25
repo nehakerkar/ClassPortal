@@ -1,40 +1,47 @@
 <%= render 'layouts/header' %>
 <h1> Welcome Admin, <%=@admin.name%> </h1><br>
 <fieldset>
-<legend><h3> Manage Admins</h3></legend>
-<%= link_to 'Create New Admin', new_admin_path %><br>
-<%= link_to 'View/Edit/Remove Admins', admins_path %><br>
+    <legend><h3> Manage Admins</h3></legend>
+    <%= link_to 'Create New Admin', new_admin_path %><br>
+    <%= link_to 'View/Edit/Remove Admins', admins_path %><br>
 </fieldset>
 <br><br>
 <fieldset>
-<legend><h3> Manage Courses</h3></legend>
-<i>Steps to create a new course:<ul>
-	<li>Create a new generic course template.<%= link_to 'Here', new_course_path %></li>
-	<li>Create a new instructor.<%= link_to 'Here', new_instructor_path %></li>
-	<li>Create new course by selecting an existing template and instructor.<%= link_to 'Here', new_course_instructor_path %></li>
-</ul></i>
-<%= link_to 'Create New Generic Course Template', new_course_path %><br>
-<%= link_to 'View/Edit/Remove Generic Course Templates', courses_path %><br>
-<%= link_to 'Create New Courses', new_course_instructor_path %><br>
-<%= link_to 'Delete Courses', course_instructors_path %><br>
-<%= link_to 'Add Material to Courses', course_instructors_path %><br>
-<%= link_to 'View List of Materials', materials_path %><br>
+    <legend><h3> Manage Courses</h3></legend>
+    <i>Steps to create a new course:
+        <ul>
+            <li>Create a new generic course template.<%= link_to 'Here', new_course_path %></li>
+            <li>Create a new instructor.<%= link_to 'Here', new_instructor_path %></li>
+            <li>Create new course by selecting an existing template and instructor.<%= link_to 'Here', new_course_instructor_path %></li>
+        </ul>
+    </i>
+    <%= link_to 'Create New Generic Course Template', new_course_path %><br>
+    <%= link_to 'View/Edit/Remove Generic Course Templates', courses_path %><br>
+    <%= link_to 'Create New Courses', new_course_instructor_path %><br>
+    <%= link_to 'Delete Courses', course_instructors_path %><br>
 </fieldset>
 <br><br>
 <fieldset>
-<legend><h3> Manage Instructors</h3></legend>
-<%= link_to 'Create New Instructor', new_instructor_path %><br>
-<%= link_to 'View/Edit/Remove Instructors', instructors_path %><br>
-<%= link_to 'View Instructor History', view_instructor_history_admins_path %><br> <!-- Yet to implement -->
+    <legend><h3>Manage Materials</h3></legend>
+    <%= link_to 'View List of Materials', materials_path %><br>
+    <%= link_to 'Add Material to Courses', course_instructors_path %><br>
 </fieldset>
 <br><br>
 <fieldset>
-<legend><h3> Manage Students</h3></legend>
-<%= link_to 'View/Edit/Remove Students', students_path %><br>
-<%= link_to 'Add Student to Courses', new_course_student_path %><br>
-<%= link_to 'View/Edit/Remove Students from courses', course_students_path %><br>
-<%= link_to 'View Student History', view_student_history_admins_path %><br> <!-- Yet to implement -->
+    <legend><h3> Manage Instructors</h3></legend>
+    <%= link_to 'Create New Instructor', new_instructor_path %><br>
+    <%= link_to 'View/Edit/Remove Instructors', instructors_path %><br>
+    <%= link_to 'View Instructor History', view_instructor_history_admins_path %><br> <!-- Yet to implement -->
 </fieldset>
+<br><br>
+<fieldset>
+    <legend><h3> Manage Students</h3></legend>
+    <%= link_to 'View/Edit/Remove Students', students_path %><br>
+    <%= link_to 'Add Student to Courses', new_course_student_path %><br>
+    <%= link_to 'View/Edit/Remove Students from courses', course_students_path %><br>
+    <%= link_to 'View Student History', view_student_history_admins_path %><br> <!-- Yet to implement -->
+</fieldset>
+<br><br>
 <fieldset>
     <legend><h3>View Users</h3></legend>
     <%= link_to 'View All Users', users_path %><br>
