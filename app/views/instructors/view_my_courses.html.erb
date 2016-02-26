@@ -29,6 +29,8 @@
         <% end %>
         <% if course_instructor.status.downcase=="active" %>
         <td><%= form_tag({:action => :request_inactive}) do %><%= hidden_field_tag 'id', course_instructor.id%><%= submit_tag( "Request to make inactive" ) %><% end%></td>
+        <%else%>
+        <td>Course Inactive</td>
         <% end %>
     </tr>
     <% end %>

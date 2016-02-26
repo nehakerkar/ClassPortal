@@ -56,7 +56,7 @@ class AdminsController < ApplicationController
           redirect_to current_user
           return
       end
-      if current_user.type == Admin.new.type && (current_user.deleteable == false || current_user.deleteable==Admin.find(params[:id].deleteable))
+      if current_user.type == Admin.new.type && (current_user.deleteable == false || current_user.deleteable==Admin.find(params[:id]).deleteable)
           set_admin
       else
           flash[:danger] = "You are not authorized to edit this page!"
