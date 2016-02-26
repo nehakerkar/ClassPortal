@@ -12,12 +12,16 @@ Rails.application.routes.draw do
   	  	post :change_grades
   	  	post :add_material
   	  	post :view_material
+  	  	post :request_inactive
   	}
   end
   resources :admins do
   	collection {
   		get :view_instructor_history
   		get :view_student_history
+  		get :view_inactive_requests
+  		post :make_inactive
+  		post :make_active
   	}
   end
   resources :course_students

@@ -110,6 +110,34 @@ class AdminsController < ApplicationController
     end
   end
 
+	def view_inactive_requests
+		@course_instructors = CourseInstructor.where("status=?",'pending')
+	end
+	
+	def make_inactive
+		if(current_user.type == Admin.new.type)
+			@course_instructor = CourseInstructor.find(params[:id])
+			@course_instructor.update(status: 'inactive')
+			flash[:notice] = "Course '" + @course_instructor.course.title + "' inactive."
+			redirect_to view_inactive_requests_admins_path
+		else
+			flash[:danger] = "You are not authorized to edit this page!"
+          	redirect_to current_user
+		end
+	end
+	
+	def make_active
+	if(current_user.type == Admin.new.type)
+			@course_instructor = CourseInstructor.find(params[:id])
+			@course_instructor.update(status: 'active')
+			flash[:notice] = "Course '" + @course_instructor.course.title + "' active."
+			redirect_to view_inactive_requests_admins_path
+		else
+			flash[:danger] = "You are not authorized to edit this page!"
+          	redirect_to current_user
+		end
+	end
+	
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_admin

@@ -165,6 +165,13 @@ class InstructorsController < ApplicationController
 		@materials = Material.where('course_instructor_id=?',params[:id])
 	end
 	
+	def request_inactive
+		@course_instructor = CourseInstructor.find(params[:id])
+		@course_instructor.update(status: 'pending')
+		flash[:notice] = "Request sent."
+		redirect_to view_my_courses_instructors_path
+	end
+	
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_instructor

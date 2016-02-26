@@ -1,6 +1,9 @@
 <%= render 'layouts/header' %>
 
-<h1>Listing Course Instructors</h1>
+<% if @course_instructors.size==0%>
+<h2> You have no pending requests. </h2>
+<% else %>
+<h1>Requests to make Course inactive</h1>
 
 <table border=1>
   <thead>
@@ -10,7 +13,7 @@
       <th>Startdate</th>
       <th>Enddate</th>
       <th>Status</th>
-      <th colspan="4"> Actions</th>
+      <th colspan="2"> Actions</th>
     </tr>
   </thead>
 
@@ -22,15 +25,13 @@
         <td><%= course_instructor.startdate %></td>
         <td><%= course_instructor.enddate %></td>
         <td><%= course_instructor.status %></td>
-        <td><%= link_to 'Show', course_instructor %></td>
-        <td><%= link_to 'Edit', edit_course_instructor_path(course_instructor) %></td>
-        <td><%= link_to 'Destroy', course_instructor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= form_tag({:action => :add_material}) do %><%= hidden_field_tag 'id', course_instructor.id%><%= submit_tag( "Add Material" ) %><% end%></td>
+        <td><%= form_tag({:action => :make_inactive}) do %><%= hidden_field_tag 'id', course_instructor.id%><%= submit_tag( "Make Inactive" ) %><% end%></td>
+        <td><%= form_tag({:action => :make_active}) do %><%= hidden_field_tag 'id', course_instructor.id%><%= submit_tag( "Make Active" ) %><% end%></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+<% end %>
 <br>
 
-<%= link_to 'New Course instructor', new_course_instructor_path %>
+<%= link_to 'Back', :back %>
