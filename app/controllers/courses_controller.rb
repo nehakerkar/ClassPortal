@@ -14,10 +14,6 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
-      if current_user.type != Admin.new.type
-          flash[:danger]= "You are not authorized to view this page!"
-          redirect_to current_user
-      end
   end
 
   def search
