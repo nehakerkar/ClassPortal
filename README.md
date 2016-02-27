@@ -23,30 +23,23 @@ assigned, your search will not show the course.
   * In order to add an instructor to a course, you first need to create a course template which contains the title, coursenumber and description for the course. You may then create the course with instructor. You may add multiple instructors for the same course but with different start/end times (non colliding).
 
   ```
-    ####  Steps:
-
+    Steps:
     *Manage Courses --> Create New Generic Course Template --> Create Course*
-
     *Manage courses --> Create New Courses --> Create Course Instructor*
   ```
 
   *  Similarly, If you have to delete a course, you first need to delete all course-instructor mappings, then course-student mappings, then course-materials and then delete the course template.
 
   ```
-  #### Steps:
-  
+  Steps:
     *Manage Students --> View/Edit/Remove Students from courses --> Destroy (all relevant records)*
-
     *Manage Courses --> View/Edit/Delete Courses --> Destroy (all relevant records)*
-
     *Manage material --> Add Material to Courses --> Destroy (all relevant records)*
-
     *Manage courses --> View/Edit/Remove Generic Course Templates --> Destroy*
   ```
 
   * Admin approving a student request for a course:
   ```
-  #### Steps:
-
+  Steps:
     *Manage Students --> View/Edit/Remove Students from courses --> Edit --> Change the status from dropdown.*
-   ```
+  ```
