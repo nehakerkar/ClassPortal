@@ -15,7 +15,7 @@
     <%= f.hidden_field :senderid, :value => current_user.id%>
   </div>
   <div class="field">
-    <%= f.label :recvid %><br>
+    <%= f.label "Send To" %><br>
     <%if current_user.type==Student.new.type%>
     <%= select("message", :recvid, Instructor.all.collect{ |c| [ c.name, c.id] }) %>
     <%end%>
@@ -24,7 +24,7 @@
     <%end%>
   </div>
   <div class="field">
-    <%= f.label :mesg %><br>
+    <%= f.label :Message %><br>
     <%= f.text_area :mesg %>
   </div>
   <div class="actions">
