@@ -8,15 +8,15 @@ password: test123
 
 
 Assumptions: 
-(1) A course can be created without an instructor. Hence,
+* A course can be created without an instructor. Hence,
 if you try to search for a course which does not have any instructor
 assigned, your search will not show the course.
 
-(2) System only has super admin pre configured. Instructor can be added to the system by the admins. Students may sign up from login page.
+* System only has super admin pre configured. Instructor can be added to the system by the admins. Students may sign up from login page.
 
-(3) If course enddate < currentdate, it won't show in search neither will it be enroll-able.
+* If course enddate < currentdate, it won't show in search neither will it be enroll-able.
 
-(4) In order to add an instructor to a course, you first need to create a course template which contains the title, coursenumber and description for the course. You may then create the course with instructor. You may add multiple instructors for the same course but with different start/end times (non colliding).
+* In order to add an instructor to a course, you first need to create a course template which contains the title, coursenumber and description for the course. You may then create the course with instructor. You may add multiple instructors for the same course but with different start/end times (non colliding).
 
 Steps:
 
@@ -36,6 +36,6 @@ Manage material --> Add Material to Courses --> Destroy (all relevant records)
 
 Manage courses --> View/Edit/Remove Generic Course Templates --> Destroy
 
-(5) Steps for admin to approve a student request for a course:
+* Steps for admin to approve a student request for a course:
 
 Manage Students --> View/Edit/Remove Students from courses --> Edit --> Change the status from dropdown.
