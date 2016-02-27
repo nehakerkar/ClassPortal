@@ -20,22 +20,22 @@ assigned, your search will not show the course.
 
   Steps:
 
-  Manage Courses --> Create New Generic Course Template --> Create Course
+    <i>Manage Courses --> Create New Generic Course Template --> Create Course</i>
 
-  Manage courses --> Create New Courses --> Create Course Instructor
+    <i>Manage courses --> Create New Courses --> Create Course Instructor</i>
 
   Similarly, If you have to delete a course, you first need to delete all course-instructor mappings, then course-student mappings, then course-materials and then delete the course template.
 
   Steps:
 
-  Manage Students --> View/Edit/Remove Students from courses --> Destroy (all relevant records)
+    <i>Manage Students --> View/Edit/Remove Students from courses --> Destroy (all relevant records)</i>
 
-  Manage Courses --> View/Edit/Delete Courses --> Destroy (all relevant records)
+    <i>Manage Courses --> View/Edit/Delete Courses --> Destroy (all relevant records)</i>
 
-  Manage material --> Add Material to Courses --> Destroy (all relevant records)
+    <i>Manage material --> Add Material to Courses --> Destroy (all relevant records)</i>
 
-  Manage courses --> View/Edit/Remove Generic Course Templates --> Destroy
+    <i>Manage courses --> View/Edit/Remove Generic Course Templates --> Destroy</i>
 
 * Steps for admin to approve a student request for a course:
 
-  Manage Students --> View/Edit/Remove Students from courses --> Edit --> Change the status from dropdown.
+    <i>Manage Students --> View/Edit/Remove Students from courses --> Edit --> Change the status from dropdown.</i>
