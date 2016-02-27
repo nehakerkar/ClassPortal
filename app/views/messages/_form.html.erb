@@ -12,12 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%if current_user.type==Student.new.type%>
-    <%= select("message", :senderid, Student.where(:id => current_user.id).collect{ |c| [ c.name, c.id] }) %>
-    <%end%>
-    <%if current_user.type==Instructor.new.type%>
-    <%= select("message", :senderid, Instructor.where(:id => current_user.id).collect{ |c| [ c.name, c.id] }) %>
-    <%end%>
+    <%= f.hidden_field :senderid, :value => current_user.id%>
   </div>
   <div class="field">
     <%= f.label :recvid %><br>
