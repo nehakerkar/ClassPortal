@@ -4,12 +4,12 @@ one:
   email: MyString
   password_digest: MyString
   name: MyString
-  usertype: MyString
+  type: MyString
   deleteable: false
 
 two:
   email: MyString
   password_digest: MyString
   name: MyString
-  usertype: MyString
+  type: MyString
   deleteable: false
