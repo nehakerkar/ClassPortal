@@ -75,4 +75,12 @@
     </tr>
   <%end%>
 </table>
-
+<h3>Messages:</h3>
+<%= link_to 'New Message', new_message_path %><br>
+<h3>View Messages:</h3>
+<%= form_tag('/messages', method: "get") do %>
+  <div class="field">
+    <%= select("message", :recvid, Instructor.all.collect{ |c| [ c.name, c.id] }) %>
+  </div>
+  <%= submit_tag("Search") %>
+<% end %>

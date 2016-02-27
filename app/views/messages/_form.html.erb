@@ -1,0 +1,38 @@
+<%= form_for(@message) do |f| %>
+  <% if @message.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
+
+      <ul>
+      <% @message.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%if current_user.type==Student.new.type%>
+    <%= select("message", :senderid, Student.where(:id => current_user.id).collect{ |c| [ c.name, c.id] }) %>
+    <%end%>
+    <%if current_user.type==Instructor.new.type%>
+    <%= select("message", :senderid, Instructor.where(:id => current_user.id).collect{ |c| [ c.name, c.id] }) %>
+    <%end%>
+  </div>
+  <div class="field">
+    <%= f.label :recvid %><br>
+    <%if current_user.type==Student.new.type%>
+    <%= select("message", :recvid, Instructor.all.collect{ |c| [ c.name, c.id] }) %>
+    <%end%>
+    <%if current_user.type==Instructor.new.type%>
+    <%= select("message", :recvid, Student.all.collect{ |c| [ c.name, c.id] }) %>
+    <%end%>
+  </div>
+  <div class="field">
+    <%= f.label :mesg %><br>
+    <%= f.text_area :mesg %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
