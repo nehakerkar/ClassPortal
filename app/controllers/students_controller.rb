@@ -72,14 +72,20 @@ class StudentsController < ApplicationController
   # DELETE /students/1
   # DELETE /students/1.json
   def destroy
-  	CourseStudent.where('user_id=?',@student.id).destroy_all
-    @student.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_path(current_user.id), notice: 'Student was successfully deleted.' }
-      format.json { head :no_content }
-    end
+      if @student.course_students.length > 0
+          respond_to do |format|
+              format.html { redirect_to admin_path(current_user.id), notice: 'Student is enrolled to courses. Unable to delete.' }
+              format.json { head :no_content }
+          end
+      else
+          CourseStudent.where('user_id=?',@student.id).destroy_all
+          @student.destroy
+          respond_to do |format|
+              format.html { redirect_to admin_path(current_user.id), notice: 'Student was successfully deleted.' }
+              format.json { head :no_content }
+          end
+      end
   end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_student

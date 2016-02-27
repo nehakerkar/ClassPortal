@@ -83,7 +83,6 @@
         <%end%>
     <%end%>
     <%if flag==true%>
-        Flag:<%=flag%><br>
         <%=link_to 'Enroll in course', course_enroll_request_path(course_number: @course.coursenumber, student_id: current_user.id, course_instr_id: params[:course_instr_id])%>
     <%end%>
 <%end%>

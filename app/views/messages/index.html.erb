@@ -1,7 +1,8 @@
+<%= render 'layouts/header' %>
 <p id="notice"><%= notice %></p>
 
+<% if @messages.length>0 %>
 <h1>Listing Messages</h1>
-
 <table>
   <thead>
     <tr>
@@ -23,7 +24,10 @@
     <% end %>
   </tbody>
 </table>
-
+<%else%>
+<h1>No messages to display</h1>
+<%end%>
 <br>
 
 <%= link_to 'New Message', new_message_path %>
+<%= link_to 'Back', :back %>

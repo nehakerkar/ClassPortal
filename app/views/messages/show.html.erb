@@ -1,13 +1,14 @@
+<%= render 'layouts/header' %>
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Senderid:</strong>
-  <%= @message.senderid %>
+  <strong>Sender:</strong>
+  <%= User.find(@message.senderid).name %>
 </p>
 
 <p>
-  <strong>Recvid:</strong>
-  <%= @message.recvid %>
+  <strong>Receiver:</strong>
+  <%= User.find(@message.recvid).name %>
 </p>
 
 <p>
@@ -16,4 +17,4 @@
 </p>
 
 <%= link_to 'Edit', edit_message_path(@message) %> |
-<%= link_to 'Back', messages_path %>
+<%= link_to 'Back', :back %>
