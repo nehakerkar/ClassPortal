@@ -71,8 +71,8 @@ class AdminsController < ApplicationController
     @admin.deleteable = true
     respond_to do |format|
       if @admin.save
-        format.html { redirect_to @admin, notice: 'Admin was successfully created.' }
-        format.json { render :show, status: :created, location: @admin }
+        format.html { redirect_to current_user, notice: 'Admin was successfully created.' }
+        format.json { render :show, status: :created, location: current_user }
       else
         format.html { render :new }
         format.json { render json: @admin.errors, status: :unprocessable_entity }
@@ -85,8 +85,8 @@ class AdminsController < ApplicationController
   def update
     respond_to do |format|
       if @admin.update(admin_params)
-        format.html { redirect_to @admin, notice: 'Admin was successfully updated.' }
-        format.json { render :show, status: :ok, location: @admin }
+        format.html { redirect_to current_user, notice: 'Admin was successfully updated.' }
+        format.json { render :show, status: :ok, location: current_user }
       else
         format.html { render :edit }
         format.json { render json: @admin.errors, status: :unprocessable_entity }
