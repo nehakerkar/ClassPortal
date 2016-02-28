@@ -43,3 +43,9 @@ assigned, your search will not show the course.
   Steps:
     *Manage Students --> View/Edit/Remove Students from courses --> Edit --> Change the status from dropdown.*
   ```
+  
+  * Steps for an instructor to request to make his course inactive: (Instructor can request only for courses where he is instructing)
+  ```
+  Steps:
+    *Home Page --> Request to make course inactive --> Click on the relevant button to make the request.*
+  ```
